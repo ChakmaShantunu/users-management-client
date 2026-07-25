@@ -1,6 +1,11 @@
+import { use } from "react";
 
 
-const RestaurantCard = () => {
+
+const RestaurantCard = ({ restaurantPromise }) => {
+
+    const initialRestaurants = use(restaurantPromise);
+    console.log(initialRestaurants);
 
     const handleAddRestaurant = e => {
         e.preventDefault();
@@ -15,11 +20,11 @@ const RestaurantCard = () => {
             headers: {
                 'content-type': 'application/json',
             },
-            body: JSON.stringify(restaurantDetails);
+            body: JSON.stringify(restaurantDetails),
         })
             .then(res => res.json())
             .then(data => {
-                console.log("data after post", data),
+                console.log("data after post", data);
             })
 
     }
