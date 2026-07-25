@@ -1,10 +1,11 @@
-import { use } from "react";
+import { use, useState } from "react";
 
 
 
 const RestaurantCard = ({ restaurantPromise }) => {
 
     const initialRestaurants = use(restaurantPromise);
+    const [restaurants, setRestaurants] = useState(initialRestaurants);
     console.log(initialRestaurants);
 
     const handleAddRestaurant = e => {
@@ -25,6 +26,9 @@ const RestaurantCard = ({ restaurantPromise }) => {
             .then(res => res.json())
             .then(data => {
                 console.log("data after post", data);
+                const newRestaurants = [...restaurants, data];
+                setRestaurants(newRestaurants);
+                form.reset();
             })
 
     }
@@ -37,6 +41,12 @@ const RestaurantCard = ({ restaurantPromise }) => {
                 <br />
                 <input type="submit" value="add restaurant" />
             </form>
+
+            <div>
+                {
+                    restaurants.map((restaurant) => <p>{restaurant.name} : {restaurant.email}</p>)
+                }
+            </div>
         </div>
     );
 };
