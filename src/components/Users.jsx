@@ -28,6 +28,7 @@ const Users = ({ usersPromise }) => {
                 console.log('data after post', data);
                 const newUsers = [...users, data];
                 setUsers(newUsers);
+                form.reset();
             })
     }
     return (
