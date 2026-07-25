@@ -1,9 +1,10 @@
-import { use } from "react";
+import { use, useState } from "react";
 
 
 const Users = ({ usersPromise }) => {
-    const usersData = use(usersPromise);
-    console.log(usersData);
+    const initialUsers = use(usersPromise);
+    const [users, setUsers] = useState(initialUsers);
+    console.log(initialUsers);
 
     const handleAddUser = e => {
         e.preventDefault();
@@ -25,6 +26,8 @@ const Users = ({ usersPromise }) => {
             .then(res => res.json())
             .then(data => {
                 console.log('data after post', data);
+                const newUsers = [...users, data];
+                setUsers(newUsers);
             })
     }
     return (
@@ -39,7 +42,7 @@ const Users = ({ usersPromise }) => {
             </form>
             <div>
                 {
-                    usersData.map((user) => <p key={user.id}>{user.name} : {user.email}</p>)
+                    users.map((user) => <p key={user.id}>{user.name} : {user.email}</p>)
                 }
             </div>
         </div>
