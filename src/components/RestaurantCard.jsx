@@ -10,6 +10,18 @@ const RestaurantCard = () => {
         const restaurantDetails = { name, email };
         console.log(restaurantDetails);
 
+        fetch("http://localhost:3000/restaurants", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(restaurantDetails);
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("data after post", data),
+            })
+
     }
     return (
         <div>
