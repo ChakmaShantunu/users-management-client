@@ -13,6 +13,18 @@ const Animals = ({ animalsPromise }) => {
         const scientificName = form.scientificName.value;
         const animal = { name, scientificName };
         console.log(animal);
+
+        fetch("http://localhost:3000/animals", {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(animal)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log("data after post", data);
+            })
     }
 
     return (
