@@ -44,7 +44,7 @@ const RestaurantCard = ({ restaurantPromise }) => {
 
             <div>
                 {
-                    restaurants.map((restaurant) => <p>{restaurant.name} : {restaurant.email}</p>)
+                    restaurants.map((restaurant) => <p key={restaurant._id}>{restaurant.name} : {restaurant.email} <button>X</button></p>)
                 }
             </div>
         </div>
