@@ -1,10 +1,11 @@
-import { use } from "react";
+import { use, useState } from "react";
 
 
 const Animals = ({ animalsPromise }) => {
 
     const initialAnimals = use(animalsPromise);
-    console.log(initialAnimals);
+    const [animals, setAnimals] = useState(initialAnimals);
+    // console.log(animals);
 
     const handleAddAnimal = e => {
         e.preventDefault();
@@ -12,7 +13,7 @@ const Animals = ({ animalsPromise }) => {
         const name = form.name.value;
         const scientificName = form.scientificName.value;
         const animal = { name, scientificName };
-        console.log(animal);
+        // console.log(animal);
 
         fetch("http://localhost:3000/animals", {
             method: 'POST',
@@ -24,6 +25,9 @@ const Animals = ({ animalsPromise }) => {
             .then(res => res.json())
             .then(data => {
                 console.log("data after post", data);
+                const newAnimals = [...animals, data];
+                setAnimals(newAnimals);
+                form.reset()
             })
     }
 
@@ -36,6 +40,12 @@ const Animals = ({ animalsPromise }) => {
                 <br />
                 <input type="submit" value="add animal" />
             </form>
+
+            <div>
+                {
+                    animals.map((animal) => <p key={animal.id}>{animal.name} : {animal.scientificName} <button>X</button></p>)
+                }
+            </div>
         </div>
     );
 };
