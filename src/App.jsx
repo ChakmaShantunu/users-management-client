@@ -21,7 +21,7 @@ function App() {
       <Users usersPromise={usersPromise}></Users><br /><br />
 
       <h2>Restaurant Form</h2>
-      <RestaurantCard restaurantPromise={restaurantPromise}></RestaurantCard>
+      <RestaurantCard restaurantPromise={restaurantPromise}></RestaurantCard><br />
 
       <h2>Animals Management</h2>
       <Animals animalsPromise={animalsPromise}></Animals>
